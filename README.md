@@ -1,7 +1,7 @@
 
-Live site for main branch: (https://lucent-zabaione-ec2c05.netlify.app/)
+Live site for main branch: https://lucent-zabaione-ec2c05.netlify.app/
 
-Live site for dev branch: (https://mellow-speculoos-a337e6.netlify.app/)
+Live site for dev branch: https://mellow-speculoos-a337e6.netlify.app/
 
 
 # Getting Started with Create React App
