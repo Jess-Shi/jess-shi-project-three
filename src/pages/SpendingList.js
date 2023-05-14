@@ -1,6 +1,9 @@
-import SpendingLog from "./SpendingLog.js";
+import SpendingLog from "../components/SpendingLog.js";
+import { useOutletContext } from "react-router-dom";
 
-const SpendingList = ({ spendingData }) => {
+const SpendingList = () => {
+
+    const spendingData = useOutletContext();
 
     return (
         <ol>

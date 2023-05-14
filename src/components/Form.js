@@ -1,7 +1,9 @@
-import { useState } from "react";
+import app from "../config/firebase-config.js";
+import { getDatabase, ref, onValue, set } from "firebase/database";
+import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-const Form = ({spendingData, spendingRef, set}) => {
+const Form = () => {
 
     const today = new Date();
     const year = today.getFullYear();
@@ -13,6 +15,22 @@ const Form = ({spendingData, spendingRef, set}) => {
     const [place, setPlace] = useState("");
     const [amount, setAmount] = useState("");
     const [tag, setTag] = useState("");
+    const [spendingData, setSpendingData] = useState([]);
+
+    const database = getDatabase(app);
+    const spendingRef = ref(database, "spending");
+
+    useEffect(() => {
+
+        onValue(spendingRef, (snapshot) => {
+            if (snapshot.exists()) {
+                setSpendingData(snapshot.val());
+            } else {
+                setSpendingData([]);
+            }
+        });
+        // eslint-disable-next-line
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
