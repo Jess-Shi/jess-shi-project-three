@@ -1,11 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Navigation = () => {
+    const location = useLocation();
+
     return (
         <nav>
-            <ul>
-                <li><Link to="/addLog">Add Log</Link></li>
-                <li><Link to="/viewLogs">View Logs</Link></li>
+            <ul className="top-nav">
+                <li><Link to="/addLog" className={location.pathname === "/addLog" ? "selected" : null}>Add Log</Link></li>
+                <li><Link to="/viewLogs" className={location.pathname === "/viewLogs" ? "selected" : null}>View Logs</Link></li>
             </ul>
         </nav>
     )

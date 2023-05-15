@@ -11,7 +11,7 @@ const App = () => {
     const location = useLocation();
 
     return (
-        <div className="App wrapper">
+        <div className="app wrapper">
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/addLog" element={<AddLog />} />

@@ -1,26 +1,9 @@
-import app from "../config/firebase-config.js";
-import { getDatabase, ref, onValue } from "firebase/database";
-import { useState, useEffect } from "react";
-import { useParams, Link, Outlet } from "react-router-dom";
+import { useOutletContext, useParams, Link, Outlet } from "react-router-dom";
 
 const FilterOptions = () => {
 
-    const [spendingData, setSpendingData] = useState([]);
+    const spendingData = useOutletContext();
     const { selectedCategory, selectedOption } = useParams();
-    const database = getDatabase(app);
-    const spendingRef = ref(database, "spending");
-
-    useEffect(() => {
-
-        onValue(spendingRef, (snapshot) => {
-            if (snapshot.exists()) {
-                setSpendingData(snapshot.val());
-            } else {
-                setSpendingData([]);
-            }
-        });
-        // eslint-disable-next-line
-    }, []);
 
     const options = {
         byMonth: [],

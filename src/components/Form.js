@@ -43,7 +43,9 @@ const Form = () => {
             amount: parseFloat(amount).toFixed(2),
             month: `${month}-${year}`,
             year: year,
-            tag: tag,
+        }
+        if (tag) {
+            newEntry.tag = tag;
         }
 
         let spendingCopy = JSON.parse(JSON.stringify(spendingData));

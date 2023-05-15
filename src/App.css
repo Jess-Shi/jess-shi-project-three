@@ -1,38 +1,126 @@
-.App {
-  text-align: center;
+:root {
+    --body-background: #111111;
+    --app-background: #faf0e6;
+    --font-colour: #000000;
+    --accent-colour: #ffffff;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html {
+    font-size: 20px;
+    scroll-behavior: smooth;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+    background: var(--body-background);
+    font-family: 'Roboto Slab', serif;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+h1, h2, p, ul, ol, input, button {
+    margin: 0;
+    padding: 0;
 }
 
-.App-link {
-  color: #61dafb;
+ul {
+    list-style: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+a {
+    color: var(--font-colour);
+    text-decoration: none;
+    display: block;
+}
+
+.wrapper {
+    width: 720px;
+    max-width: 90%;
+    height: 94vh;
+    margin: 3vh auto;
+}
+
+.app {
+    position: relative;
+    background: var(--app-background);
+    border: 10px ridge;
+}
+
+header {
+    height: 15vh;
+    text-align: center;
+}
+
+.top-nav {
+    display: flex;
+}
+
+.top-nav li {
+    width: 50%;
+}
+
+.top-nav a {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    width: 100%;
+    padding: 12px 0;
+    border-bottom: 2px dashed;
+}
+
+.top-nav .selected {
+    border-bottom: 2px solid;
+    background: var(--accent-colour);
+}
+
+h2 {
+    font-size: 2rem;
+    border-bottom: 2px dotted;
+    padding: 15px 0;
+    width: 80%;
+    margin: 0 10%;
+}
+
+main {
+    height: 70vh;
+    overflow: auto;
+}
+
+ol {
+    counter-reset: my-counter;
+}
+
+ol li {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px 0;
+}
+
+ol li:nth-child(odd) {
+    background: var(--accent-colour);
+}
+
+ol li::before {
+    counter-increment: my-counter;
+    content: counter(my-counter) ". ";
+    position: absolute;
+    left: 15px;
+}
+
+ol p {
+    width: calc(100%/4 - 15px);
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    height: 5vh;
+    width: 80%;
+    margin: 0 10%;
+    padding: 5px;
+    font-size: 0.8rem;
+    text-align: center;
+    border-top: 2px dotted;
+}
+
+footer a {
+    display: inline;
 }
