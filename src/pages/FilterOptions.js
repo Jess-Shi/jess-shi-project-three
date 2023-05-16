@@ -1,7 +1,6 @@
 import { useOutletContext, useParams, Link, Outlet } from "react-router-dom";
 
 const FilterOptions = () => {
-
     const spendingData = useOutletContext();
     const { selectedCategory, selectedOption } = useParams();
 
@@ -22,7 +21,7 @@ const FilterOptions = () => {
         if (!options.byYear.includes(year)) {
             options.byYear.push(year);
         }
-        if (!options.byTag.includes(tag)) {
+        if (tag && !options.byTag.includes(tag)) {
             options.byTag.push(tag);
         }
     });

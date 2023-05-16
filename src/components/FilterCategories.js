@@ -4,12 +4,11 @@ import { useState, useEffect } from "react";
 import { useParams, Link, Outlet } from "react-router-dom";
 
 const FilterCategories = () => {
-
     const [spendingData, setSpendingData] = useState([]);
     const { selectedCategory } = useParams();
 
     const categories = ["all", "byMonth", "byYear", "byTag"];
-    const linkText = ["View All", "View by Month", "View by Year", "View by Tag"];
+    const linkTexts = ["View All", "View by Month", "View by Year", "View by Tag"];
     
     const database = getDatabase(app);
     const spendingRef = ref(database, "spending");
@@ -33,7 +32,7 @@ const FilterCategories = () => {
                     categories.map((category, index) => {
                         return (
                             <li key={category}>
-                                <Link to={selectedCategory !== category ? category : "/viewLogs"}>{linkText[index]}</Link>
+                                <Link to={selectedCategory !== category ? category : "/viewLogs"}>{linkTexts[index]}</Link>
                                 {selectedCategory === category ? <Outlet context={spendingData} /> : null}
                             </li>
                         )
