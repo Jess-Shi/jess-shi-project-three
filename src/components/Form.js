@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const Form = () => {
-
     const today = new Date();
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, "0");
@@ -17,6 +16,7 @@ const Form = () => {
     const [tag, setTag] = useState("");
     const [notes, setNotes] = useState("");
     const [spendingData, setSpendingData] = useState([]);
+    const [message, setMessage] = useState(null);
 
     const database = getDatabase(app);
     const spendingRef = ref(database, "spending");
@@ -59,7 +59,18 @@ const Form = () => {
         } else {
             spendingCopy = [...spendingCopy.slice(0, insertIndex), newEntry, ...spendingCopy.slice(insertIndex)];
         }
-        set(spendingRef, spendingCopy);
+        set(spendingRef, spendingCopy)
+            .then(() => {
+                setMessage({ class: "success", text: "Entry logged successfully!" });
+                setTimeout(() => {
+                    setMessage(null);
+                }, 1500);
+            }).catch(() => {
+                setMessage({ class: "error", text: "An error occurred, please try again." });
+                setTimeout(() => {
+                    setMessage(null);
+                }, 1500);
+            });
 
         setPlace("");
         setAmount("");
@@ -85,6 +96,9 @@ const Form = () => {
             <textarea name="notes" id="notes" placeholder="e.g. Dinner out with friends" value={notes} onChange={e => setNotes(e.target.value)}></textarea>
             
             <button className="submit">Log Spending</button>
+            {
+                message ? <p className={`message ${message.class}`}>{message.text}</p> : null
+            }
         </form>
     )
 }

@@ -6,24 +6,27 @@ const SpendingLog = ({ entry, handleDelete }) => {
         setDisplayDropdown(!displayDropdown);
     }
 
+    const [year, month, day] = entry.date.split("-");
+    const yearShort = parseInt(year) % 100;
+    const dateShort = `${yearShort}-${month}-${day}`
+
     return (
         <li className="spending-log">
             <div className="log-summary">
-                <p>{entry.date}</p>
+                <p className="date-full">{entry.date}</p>
+                <p className="date-short">{dateShort}</p>
                 <p>{entry.place}</p>
                 <p className="amount">{entry.amount}</p>
-                <button onClick={handleClick}>{displayDropdown ? "-" : "+"}</button>
+                <button className={displayDropdown ? "down" : ""} onClick={handleClick}>»</button>
             </div>
             {
                 displayDropdown
                     ? <div className="log-dropdown">
                         <div className="log-details">
-                            <p>Tag: {entry.tag}</p>
-                            <p>Notes: {entry.notes}</p>
+                            <p><span>Tag:</span> {entry.tag}</p>
+                            <p><span>Notes:</span> {entry.notes}</p>
                         </div>
-                        <div className="log-buttons">
-                            <button onClick={() => handleDelete(entry.id)}>Delete</button>
-                        </div>
+                        <button className="delete" onClick={() => handleDelete(entry.id)}>Delete</button>
                     </div>
                     : null
             }
