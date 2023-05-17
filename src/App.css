@@ -92,6 +92,7 @@ footer {
     font-size: 0.8rem;
     text-align: center;
     border-top: 1px dotted;
+    background: var(--app-background);
 }
 
 footer a {
@@ -483,7 +484,7 @@ input[type=number]::-webkit-inner-spin-button {
     }
 }
 
-@media (max-height: 960px) {
+/* @media (max-height: 960px) {
 
     .app {
         overflow: auto;
@@ -493,9 +494,13 @@ input[type=number]::-webkit-inner-spin-button {
         overflow: visible;
         border: 0;
     }
-
+    
     footer {
-        background: var(--app-background);
-        z-index: 10;
+        position: fixed;
+        width: calc(720px - 20px);
+        bottom: calc(3vh + 10px);
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
     }
-}
+} */
