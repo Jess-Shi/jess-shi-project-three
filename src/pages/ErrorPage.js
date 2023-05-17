@@ -1,18 +1,18 @@
 import Header from "../components/Header.js";
 import Main from "../components/Main.js";
-import FilterCategories from "../components/FilterCategories.js";
+import { Link } from "react-router-dom";
 
-const ViewLogs = () => {
+const ErrorPage = () => {
     return (
         <>
             <Header>
-                <h2>Your Spending History</h2>
+                <h2>404 Not Found</h2>
             </Header>
             <Main>
-                <FilterCategories />
+                <Link to="/">Return to Home</Link>
             </Main>
         </>
     )
 }
 
-export default ViewLogs;
+export default ErrorPage;

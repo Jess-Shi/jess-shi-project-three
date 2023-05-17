@@ -6,12 +6,17 @@ html { box-sizing: border-box;}
 
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; border: 0; padding: 0; white-space: nowrap; clip-path: inset(100%); clip: rect(0 0 0 0); overflow: hidden;}
 
+/* Variables */
+
 :root {
     --body-background: #111111;
-    --app-background: #faf0e6;
-    --font-colour: #000000;
-    --accent-colour: #ffffff;
+    --app-background: #282c34;
+    --primary-font-colour: #faf0e6;
+    --secondary-font-colour: #011623;
+    --accent-colour: #9da4af;
 }
+
+/* Global styling */
 
 html {
     font-size: 20px;
@@ -20,12 +25,14 @@ html {
 
 body {
     background: var(--body-background);
+    color: var(--primary-font-colour);
     font-family: 'Roboto Slab', serif;
 }
 
-h1, h2, p, ul, ol, input, button {
+h1, h2, p, ul, ol, input, textarea, button {
     margin: 0;
     padding: 0;
+    border: 0;
 }
 
 ul {
@@ -33,9 +40,13 @@ ul {
 }
 
 a {
-    color: var(--font-colour);
+    color: var(--primary-font-colour);
     text-decoration: none;
     display: block;
+}
+
+button {
+    color: var(--primary-font-colour);
 }
 
 .wrapper {
@@ -48,82 +59,33 @@ a {
 .app {
     position: relative;
     background: var(--app-background);
-    border: 10px ridge;
+    border: 10px ridge var(--accent-colour);
 }
 
 header {
-    height: 15vh;
+    height: 17vh;
     text-align: center;
 }
 
-.top-nav {
-    display: flex;
-}
-
-.top-nav li {
-    width: 50%;
-}
-
-.top-nav a {
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    width: 100%;
-    padding: 12px 0;
-    border-bottom: 2px dashed;
-}
-
-.top-nav .selected {
-    border-bottom: 2px solid;
-    background: var(--accent-colour);
-}
-
-h2 {
-    font-size: 2rem;
-    border-bottom: 2px dotted;
-    padding: 15px 0;
-    width: 80%;
-    margin: 0 10%;
-}
-
 main {
-    height: 70vh;
+    max-height: 65vh;
+    width: 80%;
+    margin: 0 auto;
     overflow: auto;
-}
-
-ol {
-    counter-reset: my-counter;
-}
-
-ol li {
-    position: relative;
     display: flex;
-    justify-content: flex-end;
-    padding: 5px 0;
-}
-
-ol li:nth-child(odd) {
-    background: var(--accent-colour);
-}
-
-ol li::before {
-    counter-increment: my-counter;
-    content: counter(my-counter) ". ";
-    position: absolute;
-    left: 15px;
-}
-
-ol p {
-    width: calc(100%/4 - 15px);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border: 5px groove var(--accent-colour);
+    padding: 30px;
 }
 
 footer {
     position: absolute;
     bottom: 0;
-    height: 5vh;
     width: 80%;
     margin: 0 10%;
-    padding: 5px;
+    padding: 8px;
     font-size: 0.8rem;
     text-align: center;
     border-top: 2px dotted;
@@ -132,3 +94,205 @@ footer {
 footer a {
     display: inline;
 }
+
+h1 {
+    margin: 40px 0;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin: 40px 0;
+}
+
+/* Navbar styling */
+
+.top-nav {
+    display: flex;
+}
+
+.top-nav li {
+    width: calc(100%/3);
+}
+
+.top-nav a {
+    color: var(--secondary-font-colour);
+    background: var(--accent-colour);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    width: 100%;
+    padding: 12px 0 10px 0;
+    border: 1px dotted;
+}
+
+.top-nav .selected {
+    color: var(--primary-font-colour);
+    background: var(--app-background);
+    border: 1px solid var(--app-background);
+}
+
+/* Form styling */
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+
+label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+input, textarea {
+    height: 40px;
+    padding: 0 12px;
+    margin-bottom: 25px;
+    background: var(--app-background);
+    color: var(--primary-font-colour);
+    border: 2px solid var(--app-background);
+    border-bottom: 2px solid var(--primary-font-colour);
+}
+
+input:hover,
+input:focus,
+textarea:hover,
+textarea:focus {
+    outline: none;
+    border: 2px solid var(--accent-colour);
+}
+
+textarea {
+    height: 80px;
+    padding-top: 5px;
+}
+
+input[type=number] {
+    appearance: textfield;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.submit {
+    cursor: pointer;
+    background: transparent;
+    color: var(--primary-font-colour);
+    border: 2px solid var(--accent-colour);
+    width: 50%;
+    margin: 0 auto;
+    height: 50px;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+
+.submit:hover,
+.submit:focus {
+    background: var(--accent-colour);
+    color: var(--secondary-font-colour);
+    border: 2px solid var(--secondary-font-colour);
+}
+
+/* View Logs styling */
+
+.filters-nav {
+    align-self: stretch;
+}
+
+.filter-category a {
+    padding: 10px 0;
+    border-bottom: 1px dotted;
+    transition: background-color 0.3s;
+}
+
+.filter-category a:hover,
+.filter-category a:focus {
+    background: var(--accent-colour);
+    color: var(--secondary-font-colour);
+    border-bottom: 1px dotted var(--secondary-font-colour);
+}
+
+.filter-options {
+    margin-left: 20px;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.3s;
+}
+
+.filter-options.animate {
+    transform: scaleY(1);
+}
+
+.spending-list {
+    counter-reset: my-counter;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.3s;
+}
+
+.spending-list.animate {
+    transform: scaleY(1);
+}
+
+.list-headings {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.list-headings p {
+    width: 30%;
+}
+
+.list-headings .amount {
+    width: 25%;
+}
+
+.spending-log::before {
+    counter-increment: my-counter;
+    content: counter(my-counter) ". ";
+    position: absolute;
+    left: 15px;
+}
+
+.spending-log {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+    padding: 3px 0;
+}
+
+.spending-log:nth-child(even) {
+    background: var(--accent-colour);
+    color: var(--secondary-font-colour);
+}
+
+.spending-log:nth-child(even) button {
+    color: var(--secondary-font-colour);
+}
+
+.log-summary {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.log-summary p {
+    width: 30%;
+}
+
+.log-summary .amount {
+    width: 15%;
+}
+
+.log-summary button {
+    width: 10%;
+    background: transparent;
+    font-weight: 800;
+}
+

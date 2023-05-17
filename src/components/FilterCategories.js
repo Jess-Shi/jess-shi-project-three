@@ -1,5 +1,5 @@
 import app from "../config/firebase-config.js";
-import { getDatabase, ref, onValue } from "firebase/database";
+import { getDatabase, ref, onValue, set } from "firebase/database";
 import { useState, useEffect } from "react";
 import { useParams, Link, Outlet } from "react-router-dom";
 
@@ -26,14 +26,14 @@ const FilterCategories = () => {
     }, []);
     
     return (
-        <nav>
+        <nav className="filters-nav">
             <ul>
                 {
                     categories.map((category, index) => {
                         return (
-                            <li key={category}>
+                            <li key={category} className="filter-category">
                                 <Link to={selectedCategory !== category ? category : "/viewLogs"}>{linkTexts[index]}</Link>
-                                {selectedCategory === category ? <Outlet context={spendingData} /> : null}
+                                {selectedCategory === category ? <Outlet context={[spendingData, spendingRef, set]} /> : null}
                             </li>
                         )
                     })

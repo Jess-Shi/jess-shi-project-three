@@ -1,7 +1,14 @@
+import { useState, useEffect } from "react";
 import { useOutletContext, useParams, Link, Outlet } from "react-router-dom";
 
 const FilterOptions = () => {
-    const spendingData = useOutletContext();
+    const [animate, setAnimate] = useState(false);
+
+    useEffect(() => {
+        setAnimate(true);
+    }, []);
+
+    const [spendingData, spendingRef, set] = useOutletContext();
     const { selectedCategory, selectedOption } = useParams();
 
     const options = {
@@ -26,14 +33,18 @@ const FilterOptions = () => {
         }
     });
 
+    options.byMonth.reverse();
+    options.byYear.reverse();
+    options.byTag.sort();
+
     return (
-        <ul>
+        <ul className={`filter-options ${animate ? "animate" : ""}`}>
             {
             options[selectedCategory].map(option => {
                 return (
                     <li key={option}>
                         <Link to={selectedOption !== option ? option : `/viewLogs/${selectedCategory}`}>{option}</Link>
-                        {selectedOption === option ? <Outlet context={spendingData} /> : null}
+                        {selectedOption === option ? <Outlet context={[spendingData, spendingRef, set]} /> : null}
                     </li>
                     )
                 })

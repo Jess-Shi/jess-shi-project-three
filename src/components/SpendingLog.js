@@ -1,23 +1,31 @@
 import { useState } from "react";
 
-const SpendingLog = ({ date, place, amount, tag }) => {
-    const [displayDetails, setDisplayDetails] = useState(false);
+const SpendingLog = ({ entry, handleDelete }) => {
+    const [displayDropdown, setDisplayDropdown] = useState(false);
     const handleClick = () => {
-        setDisplayDetails(!displayDetails);
+        setDisplayDropdown(!displayDropdown);
     }
 
     return (
-        <li>
-            <p>{date}</p>
-            <p>{place}</p>
-            <p>{amount}</p>
-            <button onClick={handleClick}>{displayDetails ? "-" : "+"}</button>
+        <li className="spending-log">
+            <div className="log-summary">
+                <p>{entry.date}</p>
+                <p>{entry.place}</p>
+                <p className="amount">{entry.amount}</p>
+                <button onClick={handleClick}>{displayDropdown ? "-" : "+"}</button>
+            </div>
             {
-                displayDetails
-                ?   <div>
-                        <p>Tag: {tag}</p>
+                displayDropdown
+                    ? <div className="log-dropdown">
+                        <div className="log-details">
+                            <p>Tag: {entry.tag}</p>
+                            <p>Notes: {entry.notes}</p>
+                        </div>
+                        <div className="log-buttons">
+                            <button onClick={() => handleDelete(entry.id)}>Delete</button>
+                        </div>
                     </div>
-                :   null
+                    : null
             }
         </li>
     )
