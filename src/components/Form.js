@@ -16,6 +16,7 @@ const Form = () => {
     const [tag, setTag] = useState("");
     const [notes, setNotes] = useState("");
     const [spendingData, setSpendingData] = useState([]);
+    const [dataReceived, setDataReceived] = useState(false);
     const [message, setMessage] = useState(null);
 
     const database = getDatabase(app);
@@ -29,6 +30,7 @@ const Form = () => {
             } else {
                 setSpendingData([]);
             }
+            setDataReceived(true);
         });
         // eslint-disable-next-line
     }, []);
@@ -79,27 +81,35 @@ const Form = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="date">Date</label>
-            <input type="date" name="date" id="date" max={currentDate} value={date} onChange={e => setDate(e.target.value)} required />
-
-            <label htmlFor="place">Place</label>
-            <input type="text" name="place" id="place" placeholder="e.g. Matsuda" value={place} onChange={e => setPlace(e.target.value)} required />
-
-            <label htmlFor="amount">Amount</label>
-            <input type="number" name="amount" id="amount" min="0.01" step="0.01" placeholder="e.g. 205.00" value={amount} onChange={e => setAmount(e.target.value)} required />
-
-            <label htmlFor="tag">Tag (Optional)</label>
-            <input type="text" name="tag" id="tag" placeholder="e.g. Food and Drink" value={tag} onChange={e => setTag(e.target.value)} />
-
-            <label htmlFor="notes">Notes (Optional)</label>
-            <textarea name="notes" id="notes" placeholder="e.g. Dinner out with friends" value={notes} onChange={e => setNotes(e.target.value)}></textarea>
-            
-            <button className="submit">Log Spending</button>
+        <>
             {
-                message ? <p className={`message ${message.class}`}>{message.text}</p> : null
+                dataReceived
+                    ?
+                    <form onSubmit={handleSubmit}>
+                        <label htmlFor="date">Date</label>
+                        <input type="date" name="date" id="date" max={currentDate} value={date} onChange={e => setDate(e.target.value)} required />
+
+                        <label htmlFor="place">Place</label>
+                        <input type="text" name="place" id="place" placeholder="e.g. Matsuda" value={place} onChange={e => setPlace(e.target.value)} required />
+
+                        <label htmlFor="amount">Amount</label>
+                        <input type="number" name="amount" id="amount" min="0.01" step="0.01" placeholder="e.g. 205.00" value={amount} onChange={e => setAmount(e.target.value)} required />
+
+                        <label htmlFor="tag">Tag (Optional)</label>
+                        <input type="text" name="tag" id="tag" placeholder="e.g. Food and Drink" value={tag} onChange={e => setTag(e.target.value)} />
+
+                        <label htmlFor="notes">Notes (Optional)</label>
+                        <textarea name="notes" id="notes" placeholder="e.g. Dinner out with friends" value={notes} onChange={e => setNotes(e.target.value)}></textarea>
+                        
+                        <button className="submit">Log Spending</button>
+                        {
+                            message ? <p className={`message ${message.class}`}>{message.text}</p> : null
+                        }
+                    </form>
+                    :
+                    <p>Unable to connect to the database at the moment. Please try again later, thank you.</p>
             }
-        </form>
+        </>
     )
 }
 

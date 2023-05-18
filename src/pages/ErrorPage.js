@@ -9,7 +9,7 @@ const ErrorPage = () => {
                 <h2>404 Not Found</h2>
             </Header>
             <Main>
-                <Link to="/">Return to Home</Link>
+                <Link className="return-home" to="/">Return to Home</Link>
             </Main>
         </>
     )
