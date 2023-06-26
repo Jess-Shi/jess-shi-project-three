@@ -96,7 +96,7 @@ const Form = () => {
                         <input type="number" name="amount" id="amount" min="0.01" step="0.01" placeholder="e.g. 205.00" value={amount} onChange={e => setAmount(e.target.value)} required />
 
                         <label htmlFor="tag">Tag (Optional)</label>
-                        <input type="text" name="tag" id="tag" placeholder="e.g. Food and Drink" value={tag} onChange={e => setTag(e.target.value)} />
+                        <input type="text" name="tag" id="tag" placeholder="e.g. Food & Drink" value={tag} onChange={e => setTag(e.target.value)} />
 
                         <label htmlFor="notes">Notes (Optional)</label>
                         <textarea name="notes" id="notes" placeholder="e.g. Dinner out with friends" value={notes} onChange={e => setNotes(e.target.value)}></textarea>

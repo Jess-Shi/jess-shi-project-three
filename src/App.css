@@ -109,14 +109,14 @@ h2 {
 
 .message {
     position: fixed;
-    top: 50vh;
+    top: 10px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     min-width: 320px;
     font-size: 0.9rem;
     text-align: center;
     background: var(--message-background);
-    padding: 30px 50px;
+    padding: 30px 30px;
 }
 
 .success {
